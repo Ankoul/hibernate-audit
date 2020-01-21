@@ -1,0 +1,11 @@
+-- alter table credentials add
+--   constraint credentials_user_username_fk
+--     foreign key (username) references user(username)
+-- ;
+--
+--
+-- insert into user values
+-- ('3e6e2620-6322-4591-9016-3d762691f8c6',	'super admin',	1,	'super@admin',	null);
+--
+-- insert into credentials values
+-- ('3e6e2620-6322-4591-9016-3d762691f8c6',	'$2a$15$hnU8skvK8B7q2xIyUPpIlOGbVMHPdvxpumLq1pKNapDduUgCK8BfO',	1,	'super@admin');

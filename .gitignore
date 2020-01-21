@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Maven template
+target/
+
+### Intelij template
+.idea/
+engine-api.iml
+classes/
+log/
