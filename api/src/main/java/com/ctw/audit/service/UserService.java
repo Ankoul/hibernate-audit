@@ -27,12 +27,14 @@ public class UserService {
     private final static Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRep userRep;
     private CredentialsService credentialsService;
+    private UserRolesService userRolesService;
 
 
     @Autowired
-    public UserService(UserRep userRep, CredentialsService credentialsService) {
+    public UserService(UserRep userRep, CredentialsService credentialsService, UserRolesService userRolesService) {
         this.userRep = userRep;
         this.credentialsService = credentialsService;
+        this.userRolesService = userRolesService;
     }
 
     @SuppressWarnings("unchecked")
@@ -54,6 +56,9 @@ public class UserService {
         if (isEmpty(roles)) {
             return entity;
         }
+        List<UserRoles> userRoles = userRolesService.create(roles, entity.getId());
+        entity.setRoles(userRoles);
+
         UserCredentials credentialsEntity = new UserCredentials(entity, "123456");
         this.credentialsService.create(credentialsEntity);
         return entity;

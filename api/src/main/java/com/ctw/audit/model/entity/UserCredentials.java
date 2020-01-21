@@ -16,10 +16,6 @@ public class UserCredentials {
     @Column(nullable = false)
     private String password;
 
-    @MapsId
-    @OneToOne
-    private User user;
-
     public UserCredentials() {
     }
 
@@ -55,11 +51,4 @@ public class UserCredentials {
         this.password = password;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

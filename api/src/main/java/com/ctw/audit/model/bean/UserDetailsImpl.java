@@ -1,5 +1,6 @@
 package com.ctw.audit.model.bean;
 
+import com.ctw.audit.model.entity.User;
 import com.ctw.audit.model.entity.UserCredentials;
 import com.ctw.audit.model.entity.UserRoles;
 import com.ctw.audit.model.enumaration.RolesEnum;
@@ -31,11 +32,11 @@ public class UserDetailsImpl implements UserDetails, CredentialsContainer {
     private String schoolId;
     private Set<GrantedAuthority> authorities;
 
-    public UserDetailsImpl(UserCredentials userCredentials) {
+    public UserDetailsImpl(UserCredentials userCredentials, User user) {
         this.id = userCredentials.getId();
         this.username = userCredentials.getUsername();
         this.password = userCredentials.getPassword();
-        this.setAuthorities(userCredentials.getUser().getRoles());
+        this.setAuthorities(user.getRoles());
     }
 
     private void setAuthorities(List<UserRoles> roles) {

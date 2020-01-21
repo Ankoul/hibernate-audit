@@ -3,12 +3,14 @@ package com.ctw.audit.model.entity;
 import com.ctw.audit.model.enumaration.RolesEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Entity
+@Audited
 @JsonInclude(NON_NULL)
 public class UserRoles {
 

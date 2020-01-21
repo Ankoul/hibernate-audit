@@ -12,7 +12,11 @@ public class CurrentUser {
     }
 
     public static String getId() {
-        return ((UserDetailsImpl)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetailsImpl) {
+            return ((UserDetailsImpl) principal).getId();
+        }
+        return principal.toString();
     }
 
     public static boolean hasRole(RolesEnum role) {

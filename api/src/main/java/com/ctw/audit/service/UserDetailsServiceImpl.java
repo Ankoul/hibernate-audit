@@ -22,10 +22,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserCredentials user = credentialsRep.findByUsername(username);
-        if (user == null) {
+        UserCredentials credentials = credentialsRep.findByUsername(username);
+        if (credentials == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new UserDetailsImpl(user);
+        User user = this.userRep.findByUsername(username);
+        return new UserDetailsImpl(credentials, user);
     }
 }

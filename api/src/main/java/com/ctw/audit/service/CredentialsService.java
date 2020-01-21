@@ -27,8 +27,6 @@ public class CredentialsService  {
         Assert.hasText(credentialsEntity.getId());
         Assert.hasText(credentialsEntity.getUsername());
         Assert.hasText(credentialsEntity.getPassword());
-        Assert.notNull(credentialsEntity.getUser());
-        Assert.notEmpty(credentialsEntity.getUser().getRoles());
 
         String password = passwordEncoder.encode(credentialsEntity.getPassword());
         credentialsEntity.setPassword(password);
