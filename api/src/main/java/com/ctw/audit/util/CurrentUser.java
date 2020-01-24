@@ -5,6 +5,7 @@ import com.ctw.audit.model.enumaration.RolesEnum;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+@SuppressWarnings("unused")
 public class CurrentUser {
 
     public static String getUsername() {

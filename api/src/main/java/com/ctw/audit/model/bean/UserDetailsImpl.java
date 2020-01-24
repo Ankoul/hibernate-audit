@@ -3,7 +3,6 @@ package com.ctw.audit.model.bean;
 import com.ctw.audit.model.entity.User;
 import com.ctw.audit.model.entity.UserCredentials;
 import com.ctw.audit.model.entity.UserRoles;
-import com.ctw.audit.model.enumaration.RolesEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.security.core.CredentialsContainer;
@@ -29,7 +28,6 @@ public class UserDetailsImpl implements UserDetails, CredentialsContainer {
     private String id;
     private String username;
     private String password;
-    private String schoolId;
     private Set<GrantedAuthority> authorities;
 
     public UserDetailsImpl(UserCredentials userCredentials, User user) {
@@ -60,22 +58,6 @@ public class UserDetailsImpl implements UserDetails, CredentialsContainer {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
     }
 
     @JsonIgnore

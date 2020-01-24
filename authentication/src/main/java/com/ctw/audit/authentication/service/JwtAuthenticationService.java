@@ -15,17 +15,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Service;
+
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @Service
-public class JwtAuthenticationService extends BasicAuthentication{
+public class JwtAuthenticationService extends BasicAuthentication {
 
-    private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 10; // 10 days
-    private static final String BEARER_PREFIX = "Bearer ";
 
     @Value("${jwt.secret}")
     private String secret;
@@ -44,12 +44,12 @@ public class JwtAuthenticationService extends BasicAuthentication{
 
 
     @Override
-    public Authentication authenticate(UserCredentials credentials)  {
+    public Authentication authenticate(UserCredentials credentials) {
         if (credentials == null || isBlank(credentials.getUsername()) || isBlank(credentials.getPassword())) {
             throw new BadCredentialsException("you must inform username and password to login");
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(credentials.getUsername());
-        if(userDetails == null || !passwordEncoder.matches(credentials.getPassword(), userDetails.getPassword())){
+        if (userDetails == null || !passwordEncoder.matches(credentials.getPassword(), userDetails.getPassword())) {
             throw new BadCredentialsException("username and password doesn't match");
         }
 
@@ -71,12 +71,12 @@ public class JwtAuthenticationService extends BasicAuthentication{
     Authentication authenticate(HttpServletRequest request) {
 
         String token = request.getHeader(AUTHORIZATION_HEADER);
-        if(token == null || !token.startsWith(BEARER_PREFIX)){
+        if (token == null || !token.startsWith(BEARER_PREFIX)) {
             return null;
         }
 
         String username = this.extractTokenSubject(token);
-        if(username == null){
+        if (username == null) {
             return null;
         }
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);

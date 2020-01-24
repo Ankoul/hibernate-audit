@@ -1,7 +1,7 @@
 package com.ctw.audit.authentication.controller;
 
-import com.ctw.audit.authentication.model.ResponseSuccess;
 import com.ctw.audit.authentication.service.AuthenticationService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 
 @RestController
@@ -29,7 +28,7 @@ public class AuthenticationController {
     @ResponseBody
     @Transactional(readOnly = true)
     @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json")
-    public Map authenticate(HttpServletRequest request, HttpServletResponse response) {
+    public Object authenticate(HttpServletRequest request, HttpServletResponse response) {
         return authenticationService.authenticate(request, response);
     }
 
@@ -37,8 +36,8 @@ public class AuthenticationController {
     @Transactional(readOnly = true)
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/validate", method = RequestMethod.GET, produces = "application/json")
-    public ResponseSuccess validate() {
-        return ResponseSuccess.SUCCESS;
+    public Object validate() {
+        return new Pair<>("success", true);
     }
 
 }
